@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="utf-8">
+    <title>Om Meg - Henrik Portfolio Programmering Prosjekter IT Medieproduksjon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Henriks portfolio med prosjekter innen programmering, spillutvikling, sikkerhet og OS development. Student på Breivang VGS IT & Medieproduksjon.">
+    <meta name="keywords" content="Henrik, portfolio, programmering, prosjekter, spillutvikling, IT, medieproduksjon, Breivang VGS, Roblox, reverse engineering">
+
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Om Meg - Henrik Portfolio Programmering Prosjekter">
+    <meta property="og:description" content="Henriks portfolio med prosjekter innen programmering, spillutvikling, sikkerhet og OS development. Student på Breivang VGS IT & Medieproduksjon.">
+    <meta property="og:image" content="Image.png">
+    <meta property="og:type" content="profile">
+    <meta property="og:locale" content="no_NO">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* animert bakgrunn */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* om meg kort */
+        .about-me-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 200, 255, 0.1) 100%);
+            border: 3px solid #00ff88;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3), inset 0 0 30px rgba(0, 255, 136, 0.1);
+            animation: cardGlow 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            will-change: box-shadow;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* glod animasjon */
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3), inset 0 0 30px rgba(0, 255, 136, 0.1); }
+            50% { box-shadow: 0 15px 60px rgba(0, 255, 136, 0.5), inset 0 0 40px rgba(0, 255, 136, 0.15); }
+        }
+
+        .about-me-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.15), transparent);
+            animation: shine 6s ease-in-out infinite;
+        }
+
+        /* skinnende effekt */
+        @keyframes shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .about-me-card h2 {
+            font-size: 2.5em;
+            color: #00ff88;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* profilbilde */
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid #00ff88;
+            margin: 20px auto;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+            animation: imgPulse 4s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            will-change: box-shadow;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* bilde puls */
+        @keyframes imgPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.6); }
+            50% { box-shadow: 0 0 45px rgba(0, 255, 136, 0.8); }
+        }
+
+        /* info grid */
+        .info-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 30px;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #00ff88;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, background;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .info-item:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: translateX(8px) translateZ(0);
+            border-left-width: 6px;
+        }
+
+        .info-item .label {
+            color: #00ff88;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .info-item .value {
+            color: #e0e0e0;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: titlePulse 3s ease-in-out infinite;
+            will-change: text-shadow;
+            transform: translateZ(0);
+        }
+
+        /* tittel puls */
+        @keyframes titlePulse {
+            0%, 100% { text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
+            50% { text-shadow: 0 0 25px rgba(0, 255, 136, 0.8), 0 0 50px rgba(0, 255, 136, 0.4); }
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 50px;
+            color: #b0b0b0;
+        }
+
+        .projects {
+            display: grid;
+            gap: 25px;
+        }
+
+        /* prosjekt kort */
+        .project {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 255, 136, 0.05) 100%);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        /* hover effekt */
+        .project:hover {
+            border-color: #00ff88;
+            transform: translateY(-10px) scale(1.02) translateZ(0);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 255, 136, 0.2);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 200, 255, 0.1) 100%);
+        }
+
+        .project:hover::before {
+            left: 100%;
+        }
+
+        .project h2 {
+            color: #00ff88;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .project p {
+            color: #d0d0d0;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        /* tags for prosjekter */
+        .tag {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            margin-top: 10px;
+            margin-right: 8px;
+        }
+
+        /* mobil visning */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .project h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- om meg seksjon -->
+        <div class="about-me-card">
+            <h2>Henrik - Student Programmering IT Medieproduksjon</h2>
+            <img src="Image.png" alt="Henrik - 17 år gammel student på Breivang VGS innen IT og Medieproduksjon, programmering og spillutvikling" class="profile-img">
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">Alder:</span>
+                    <span class="value">17 år gammel</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Hobbier:</span>
+                    <span class="value">Vektløfting, videospill, programmering</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Språk:</span>
+                    <span class="value">Kinesisk, Engelsk, Norsk, Tysk, Svensk</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Jobb:</span>
+                    <span class="value">Bilmekaniker hos Bil & Lakkservice AS</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Skole:</span>
+                    <span class="value">Breivang VGS - IT & Medieproduksjon</span>
+                </div>
+            </div>
+        </div>
+
+        <h1>Mine Programmering Prosjekter - IT & Medieproduksjon</h1>
+        <p class="intro">Her er en samling av programmering prosjektene jeg har jobbet med innen IT, spillutvikling og sikkerhet</p>
+
+        <div class="projects">
+            <!-- hyperion dumper -->
+            <div class="project">
+                <h2>Hyperion Dumper</h2>
+                <p>Utviklet en dumper for Hyperion anti-cheat systemet i Roblox. Dette verktøyet analyserer og ekstraherer data fra Roblox sitt sikkerhetssystem.</p>
+                <span class="tag">Sikkerhet</span>
+                <span class="tag">Roblox</span>
+                <span class="tag">Reverse Engineering</span>
+            </div>
+
+            <!-- day zero scanner -->
+            <div class="project">
+                <h2>Day Zero Scanner</h2>
+                <p>Laget en scanner som oppdager sårbarheter og potensielle sikkerhetsproblemer. Verktøyet er designet for å finne zero-day sårbarheter.</p>
+                <span class="tag">Sikkerhet</span>
+                <span class="tag">Skanning</span>
+            </div>
+
+            <!-- remote shutdown -->
+            <div class="project">
+                <h2>Remote Shutdown Verktøy</h2>
+                <p>Utviklet et system for å kunne fjernstyre og slå av datamaskiner over nettverket. Praktisk for systemadministrasjon og nettverksstyring.</p>
+                <span class="tag">Nettverk</span>
+                <span class="tag">Systemadministrasjon</span>
+            </div>
+
+            <!-- eget OS -->
+            <div class="project">
+                <h2>Eget Operativsystem</h2>
+                <p>Bygget mitt eget operativsystem fra bunnen av. Prosjektet inkluderer implementasjon av kernel, minnehåndtering, og grunnleggende systemfunksjoner.</p>
+                <span class="tag">OS Development</span>
+                <span class="tag">Low-level</span>
+                <span class="tag">C/Assembly</span>
+            </div>
+
+            <!-- spill -->
+            <div class="project">
+                <h2>Videospill Utvikling</h2>
+                <p>Laget flere videospill med ulike spillmekanikker og grafikk. Prosjektene spenner fra 2D platformere til mer komplekse spillsystemer.</p>
+                <span class="tag">Game Development</span>
+                <span class="tag">Grafikk</span>
+            </div>
+
+            <!-- diverse -->
+            <div class="project">
+                <h2>Diverse Prosjekter</h2>
+                <p>I tillegg til hovedprosjektene over har jeg jobbet med mange andre verktøy, scripts og programmer. Alt fra automatiseringsverktøy til nettverksapplikasjoner.</p>
+                <span class="tag">Diverse</span>
+                <span class="tag">Automatisering</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

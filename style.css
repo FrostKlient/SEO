@@ -1,0 +1,280 @@
+:root{
+  --bg:#fff; --text:#3c4043; --border:#dadce0; --hover:#f8f9fa;
+  --blue:#1a73e8; --red:#ea4335; --yellow:#fbbc05; --green:#34a853;
+  --shadow:0 2px 10px 0 rgba(0,0,0,.2);
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  overflow:hidden;
+  color:var(--text);
+  font:14px/1.4 arial, sans-serif;
+}
+
+/* scroll container med snap funksjonalitet */
+#scroll-container {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* smooth scrollbar */
+#scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+#scroll-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#scroll-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff88, #00c8ff);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+#scroll-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ff88, #00ffdd);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+/* seksjoner som snapper */
+.snap-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* google seksjon med 3d effekter */
+#google-section {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.6s ease-out,
+              filter 0.6s ease-out;
+  will-change: transform, opacity, filter;
+}
+
+#google-section.scrolling {
+  transform: rotateX(-15deg) scale(0.85);
+  filter: blur(8px) brightness(0.6);
+  opacity: 0.3;
+}
+
+/* om meg seksjon starter usynlig */
+#about-section {
+  opacity: 0;
+  transform: perspective(2000px) rotateY(-30deg) scale(0.9) translateZ(0);
+  transform-origin: center center;
+  filter: blur(10px) brightness(1.2);
+  box-shadow: 0 0 0 rgba(0, 255, 136, 0);
+  transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.8s ease-out,
+              filter 0.8s ease-out,
+              box-shadow 0.8s ease-out;
+  position: relative;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* om meg seksjon nar den er synlig */
+#about-section.visible {
+  opacity: 1;
+  transform: perspective(2000px) rotateY(0deg) scale(1) translateZ(0);
+  filter: blur(0) brightness(1);
+  box-shadow: 0 0 60px rgba(0, 255, 136, 0.3), 0 0 120px rgba(0, 255, 136, 0.15);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* glow puls animasjon */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 60px rgba(0, 255, 136, 0.3), 0 0 120px rgba(0, 255, 136, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 90px rgba(0, 255, 136, 0.45), 0 0 180px rgba(0, 255, 136, 0.25);
+  }
+}
+
+/* om meg iframe */
+#about-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+  overflow: hidden;
+}
+
+/* dark mode knapp */
+#darkModeToggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+  background: #f8f9fa;
+  border: 1px solid #dadce0;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  animation: floatBtn 3s ease-in-out infinite;
+}
+
+@keyframes floatBtn {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+#darkModeToggle:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+/* cursor trail */
+.cursor-trail {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 255, 136, 0.5);
+  pointer-events: none;
+  z-index: 9998;
+  animation: trailFade 0.8s ease-out forwards;
+}
+
+@keyframes trailFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* click ripple */
+.click-ripple {
+  position: fixed;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 136, 0.8);
+  pointer-events: none;
+  z-index: 9997;
+  animation: rippleExpand 1s ease-out forwards;
+}
+
+@keyframes rippleExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+  }
+}
+
+a{color:var(--text); text-decoration:none}
+
+/* gradient bakgrunn */
+.gradient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  opacity: 0.15;
+  z-index: 0;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(90deg);
+  }
+}
+
+/* partikkel canvas */
+#particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* wave canvas */
+#wave-canvas {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+#world{position:absolute; inset:0; overflow:hidden; pointer-events:all; z-index: 2;}
+.body{position:fixed; touch-action:none; user-select:none; will-change:transform; cursor:grab;}
+.body:active{cursor:grabbing;}
+.card{background:white; border:1px solid var(--border); border-radius:8px; color:var(--text); box-shadow:var(--shadow);}
+
+/* google logo */
+.logo{display:flex; gap:0; padding:20px 24px; background:transparent; font-family:arial, sans-serif;}
+.logo .letter{font-weight:400; font-size:90px; line-height:1;}
+.lG{color:#4285f4} .lo1{color:#ea4335} .lo2{color:#fbbc05} .lg{color:#4285f4} .ll{color:#34a853} .le{color:#ea4335}
+
+/* sokeboks */
+.search{display:flex; gap:8px; align-items:center; padding:10px 8px 10px 16px; border-radius:24px; border:1px solid #dfe1e5; background:white; box-shadow:0 2px 6px 0 rgba(32,33,36,.28); width:584px;}
+.search:hover{box-shadow:0 2px 8px 0 rgba(32,33,36,.28);}
+.search:focus-within{box-shadow:0 2px 8px 0 rgba(32,33,36,.28); border-color:rgba(223,225,229,0);}
+.search input{flex:1; background:transparent; border:none; outline:none; color:var(--text); font-size:16px; height:34px;}
+.search-icon{width:20px; height:20px; opacity:.54; cursor:pointer; margin-right:8px;}
+.search-icon:hover{opacity:.87;}
+.search .mic{width:24px; height:24px; opacity:.54; cursor:pointer; margin-left:8px;}
+.search .mic:hover{opacity:.87;}
+
+/* knapper */
+.buttons{display:flex; gap:11px; margin-top:30px;}
+.btn{background:var(--hover); border:1px solid var(--hover); color:var(--text); padding:10px 20px; border-radius:4px; font-size:14px; cursor:pointer; font-family:arial, sans-serif;}
+.btn:hover{box-shadow:0 1px 1px rgba(0,0,0,.1); border-color:var(--border);}
+
+/* sokeresultater */
+.result{width:300px; max-width:90vw; padding:16px;}
+.result h3{margin:0 0 8px; font-size:18px; color:var(--blue);}
+.result .url{margin:0 0 4px; font-size:14px; color:#006621;}
+.result p{margin:0; color:#4d5156; font-size:14px; line-height:1.58;}
+.result:hover{cursor:pointer;}
